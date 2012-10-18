@@ -79,9 +79,35 @@ along with ComBot.  If not, see <http://www.gnu.org/licenses/>.
 						<Width>98%</Width> 
 						<Height>18%</Height> 
 						<Wrap />
-						<Text>DroneBunny is designed to run Drones for you in an incursion compatible "drones all assist the bunny" fashion</Text>
+						<Text>DroneBunny is designed to run drones for you in an incursion compatible "drones all assist the bunny" fashion</Text>
 					</Text>						 
-					
+					<Text name='obj_DroneBunny_Master_Label'>
+						<X>1%</X>
+						<Y>21%</Y>
+						<Width>10%</Width>
+						<Height>3%</Height>
+						<Text>Current Master:</Text>
+					</Text>
+					<Text name='obj_DroneBunny_Master'>
+						<X>11%</X>
+						<Y>21%</Y>
+						<Width>10%</Width>
+						<Height>3%</Height>
+						<Text></Text>
+						<OnLoad>
+							This:SetText[${Script[ComBot].VariableScope.DroneBunny.Config.Master}]
+						</OnLoad>
+					</Text>
+					<Button name='obj_DroneBunny_SetMaster'>
+						<X>1%</X>
+						<Y>26%</Y>
+						<Width>10%</Width>
+						<Height>5%</Height>
+						<Text>Set Master</Text>
+						<OnLeftClick>
+							Script[ComBot].VariableScope.DroneBunny:SetMaster
+						</OnLeftClick>
+					</Button>
 				</Children>
 			</Frame>
 		</Children>

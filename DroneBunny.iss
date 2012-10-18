@@ -19,8 +19,21 @@ along with ComBot.  If not, see <http://www.gnu.org/licenses/>.
 
 */
 
+objectdef obj_DroneBunnyConfig inherits obj_Base_Configuration
+{
+	method Initialize()
+	{
+		This[parent]:Initialize["DroneBunny"]
+	}
+
+Setting(string, Master, SetMaster)
+Setting(string, DroneType, SetDroneType)
+
+}
+
 objectdef obj_DroneBunny inherits obj_State
 {
+	variable obj_DroneBunnyConfig Config
 	
 	method Initialize()
 	{
@@ -28,6 +41,8 @@ objectdef obj_DroneBunny inherits obj_State
 		This.NonGameTiedPulse:Set[TRUE]
 		PulseFrequency:Set[500]
 		DynamicAddMiniMode("DroneBunny", "DroneBunny")
+		LavishScript:RegisterEvent["Combot_DroneBunny_SetMaster"]
+		Event[Combot_DroneBunny_SetMaster]:AttachAtom[This:SetMasterEvent]
 	}
 	
 	method Start()
@@ -42,4 +57,13 @@ objectdef obj_DroneBunny inherits obj_State
 		This:Clear
 	}
 	
+	method SetMaster()
+	{
+		relay all "Event[CombotDroneBunny_SetMaster]:Execute[${Me.CharID}]"
+	}
+	
+	method SetMasterEvent(int64 Master)
+	{
+		Config:SetMaster[${Master}]
+	}
 }
